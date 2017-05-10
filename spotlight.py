@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Author: Shobhit Kumar Deepanker
 
@@ -12,6 +11,8 @@ import ctypes
 from PIL import Image
 import os
 import glob
+import requests
+import json
 
 SPI_SETDESKWALLPAPER = 20
 HORIZONTAL = (1920, 1080)
@@ -22,6 +23,8 @@ def getUserHome():
       return path
 
 WALLPAPERS_PATH = getUserHome() + '\\AppData\\Local\\Packages\\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\\LocalState\\Assets\\'
+
+CLIENT_ID = '429f941696633ae4e621a7cc0c4460fa143cccdaf5db76bee2b3d4b8dbfc6a69'
 
 file_list = (sorted(glob.glob(WALLPAPERS_PATH + "\\*"), key=os.path.getmtime, reverse=True))
 
@@ -45,11 +48,45 @@ def change_wallpaper(path):
     # unless there is an error (like when the specified file doesn't exist).
     if not r:
         print(ctypes.WinError())
+        
+def unsplash():
+      url = 'https://api.unsplash.com/photos/random/'
+      params = dict(
+                  orientattion='landscape',
+                  client_id=CLIENT_ID
+      )
+      resp = requests.get(url=url, params=params)
+      print('Getting the wallpaper.....')
+      data = json.loads(resp.text)
+      img_data = requests.get(data['urls']['full']).content
+      with open('temp.jpg', 'wb') as handler:
+            handler.write(img_data)
+      print('Setting now!')
+      path = os.path.abspath('temp.jpg')
+      change_wallpaper(path)
+      print ("The wallpaper has been changed!\n")
+      print ("-------------------------------------------")
+      os.remove('temp.jpg')
+      
+def spotlight():
+      for fn in file_list :
+            im = Image.open(fn)
+            if im.size == HORIZONTAL:
+      #            print (fn)
+                  change_wallpaper(fn)
+                  print ("The wallpaper has been changed!\n")
+                  print ("-------------------------------------------")
+                  break
 
-for fn in file_list :
-      im = Image.open(fn)
-      if im.size == HORIZONTAL:
-#            print (fn)
-            change_wallpaper(fn)
-            print ("The wallpaper has been changed!")
+while(1):
+      print('What do you want to set as the background?')
+      print('1. Windows Spotlight Image \n2. Random Unsplash Image \n0. Abort')
+      usr_inp = input()
+      if usr_inp is '1':
+            spotlight()
+      elif usr_inp is '2':
+            unsplash()
+      elif usr_inp is '0':
             break
+      else:
+            print('Please select a valid value')
