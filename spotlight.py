@@ -49,6 +49,7 @@ def change_wallpaper(path):
 for fn in file_list :
       im = Image.open(fn)
       if im.size == HORIZONTAL:
-            print (fn)
+#            print (fn)
             change_wallpaper(fn)
+            print ("The wallpaper has been changed!")
             break
