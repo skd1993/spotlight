@@ -1,4 +1,4 @@
-##Spotlight
+Spotlight
 -------------
 
 This is a simple python script that takes the most recent Windows Spotlight picture stored on your computer and sets it as the wallpaper.
