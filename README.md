@@ -2,7 +2,7 @@ Spotlight
 -------------
 
 This is a simple python script that sets your Windows desktop wallpaper to:
-- the most recent Windows Spotlight picture stored on your computer and **OR**
+- the most recent Windows Spotlight picture stored on your computer **OR**
 - a random image from [*Unsplash*](https://unsplash.com)
 
 **What is Windows Spotlight?**
