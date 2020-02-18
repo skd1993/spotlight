@@ -82,11 +82,11 @@ while(1):
       print('What do you want to set as the background?')
       print('1. Windows Spotlight Image \n2. Random Unsplash Image \n0. Abort')
       usr_inp = input()
-      if usr_inp is '1':
+      if usr_inp == '1':
             spotlight()
-      elif usr_inp is '2':
+      elif usr_inp == '2':
             unsplash()
-      elif usr_inp is '0':
+      elif usr_inp == '0':
             break
       else:
             print('Please select a valid value')
