@@ -17,5 +17,6 @@ The background of the lockscreen on Windows 10 gets set to a beautiful picture p
 
 - Download *spotlight.py* (Clone this repo)
 - Open the folder where it is downloaded and open command prompt there
-- Type ```python spotlight.py``` and hit ```Enter```
+- Type ```pip install -r requirements.txt``` and hit ```Enter```. This will install necessary libraries.
+- Then, type ```python spotlight.py``` and hit ```Enter```
 - Choose the required option and ```Enter```
